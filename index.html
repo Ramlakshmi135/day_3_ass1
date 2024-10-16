@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batsman Statistics</title>
+</head>
+<body>
+
+    <h2>Batsman Statistics</h2>
+   
+
+    <input type="text" id="batsmanName" placeholder="Batsman Name">
+    <input type="number" id="runsScored" placeholder="Runs Scored">
+    <input type="number" id="ballsFaced" placeholder="Balls Faced">
+    <button id="addButton">Add</button>
+    <button id="removeButton">Remove All</button>
+
+   <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Balls Faced</th>
+                <th>Runs Scored</th>
+                <th>Strike Rate</th>
+            </tr>
+        </thead>
+        <tbody id="batsmanTableBody">
+           
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('addButton').addEventListener('click', function() {
+            let name = document.getElementById('batsmanName').value;
+            let runs = parseInt(document.getElementById('runsScored').value);
+            let balls = parseInt(document.getElementById('ballsFaced').value);
+
+            if (name && runs > 0 && balls > 0) {
+                const strikeRate = Math.round(runs * 100 / balls);
+
+                let tableBody = document.getElementById('batsmanTableBody');
+                let row = `<tr><td>${name}</td><td>${balls}</td><td>${runs}</td><td>${strikeRate}</td></tr>`;
+                tableBody.innerHTML += row;
+
+            
+                document.getElementById('batsmanName').value = '';
+                document.getElementById('runsScored').value = '';
+                document.getElementById('ballsFaced').value = '';
+            } else {
+                alert('Please enter valid data');
+            }
+        });
+
+        document.getElementById('removeButton').addEventListener('click', function() {
+            document.getElementById('batsmanTableBody').innerHTML = '';
+        });
+    </script>
+
+</body>
+</html>
